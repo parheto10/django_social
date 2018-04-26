@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Connexion
+{% endblock %}
+
+{% block content %}
+    <h1>Connexion</h1>
+
+    <p>Utiliser le formulaire ci-dessous pour Vous Connecter:</p>
+    <form action="." method="post">{% csrf_token %}
+        {{ login_form.as_p }}
+        <p><input type="submit" value="Connexion"></p>
+    </form>
+{% endblock %}
