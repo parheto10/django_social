@@ -1,0 +1,13 @@
+{% extends  'base.html' %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block content %}
+    <h1>Dashboard</h1>
+    <p>
+        Bienvenu sur votre profile. vous pouvez a présent <a href="{% url 'comptes:edit' %}">Modifier Votre Profiel</a>,
+        ou <a href="{% url 'comptes:password_change' %}">Modifier Votre Mot de Passe</a>
+    </p>
+{% endblock %}

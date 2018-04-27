@@ -20,7 +20,12 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url('', include('django.contrib.auth.urls')),
     url(r'^comptes/', include('comptes.urls', app_name="comptes", namespace="comptes")),
+]
+
+urlpatterns += [
+    url(r'^captcha/', include('captcha.urls')),
 ]
 
 if settings.DEBUG:

@@ -27,17 +27,37 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'parheto10@gmail.com'
+EMAIL_HOST_PASSWORD = 'mietchomel@10#'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #app tierces
+    'bootstrap4',
+    'bootstrap3_datetime',
+    'bootstrap4_datetime',
+    'bootstrap_datepicker',
+    'captcha',
+    'crispy_forms',
+    'django_countries',
+    'phonenumber_field',
+    'sorl.thumbnail',
+
     'comptes.apps.ComptesConfig',
+    'django.contrib.admin',
 ]
 
 MIDDLEWARE = [
@@ -129,5 +149,12 @@ STATIC_ROOT = (os.path.join(BASE_DIR, 'assets', "static_root"))
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = (os.path.join(BASE_DIR, 'static', 'medias'))
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+from django.core.urlresolvers import reverse_lazy
+LOGIN_REDIRECT_URL = reverse_lazy('comptes:dashboard')
+LOGIN_URL = reverse_lazy('comptes:login')
+LOGOUT_URL = reverse_lazy('comptes:logout')
 
 

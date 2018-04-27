@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Déconnexion
+{% endblock %}
+
+{% block content %}
+    <h1>
+        Vous êtes à present déconnecté.
+        Click pour vous<a href="{% url 'comptes:login' %}"> Reconnecter</a>
+    </h1>
+{% endblock %}

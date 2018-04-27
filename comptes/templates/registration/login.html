@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}
+    Connexion
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <h1>Connexion</h1>
+            {% if form.errors %}
+                <p>Vérifier Vos Paramètres de Connexion</p>
+            {% else %}
+                <p>Utiliser Le Formulaire ci-Dessous pour Vous Connecter</p>
+            {% endif %}
+            <div class="login-form">
+                <form action="{% url 'comptes:login' %}" method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <input type="hidden" name="next" value="{{ next }}" />
+                    <p><input type="submit" value="Connexion"></p>
+                </form>
+                <hr/>
+                <p><a href="{% url 'comptes:password_reset' %}">J'ai Oublié Mon Mot de Passe</a></p>
+                <p><a href="{% url 'comptes:register' %}">J'ai Pas de Compte</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

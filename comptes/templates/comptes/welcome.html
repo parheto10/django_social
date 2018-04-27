@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Inscrit - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+    <div class="col-md-6 offset-3">
+        <p>Inscription Validé avec Succès, Bienvenus {{ new_user.username }}</p>
+        <hr/>
+        <p><a class="btn btn-outline-primary" href="{% url 'comptes:login' %}">Connexion</a></p>
+    </div>
+</div>
+{% endblock %}
