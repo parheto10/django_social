@@ -1,58 +1,44 @@
-{% url 'home' as home_url %}
-{% url 'contact' as contact_url %}
-{% url 'about' as about_url %}
-{% url 'produits:produits' as produits_url %}
-{% url 'panier:panier' as panier_url %}
+{% url 'comptes:dashboard' as dashboard_url %}
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3 custom-nav">
+  <div class="container">
+    <a href="{{ dashboard_url }}" class="navbar-brand">Django Social NetWork</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
-<div class="container">
-  <a class="navbar-brand" href="{{ home_url }}">
-      <img src="http://getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" class="visible-md-inline-block align-top " alt="">
-      {% if brand_name %} {{ brand_name }} {% else %} LeLôgôfièh {% endif %}
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item {% if request.path == home_url %}active{% endif %}">
-        <a class="nav-link" href="{{ home_url }}">Accueil <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item {% if request.path == contact_url %}active{% endif %}">
-        <a class="nav-link" href="{{ contact_url }}">Contacts</a>
-      </li>
-      <li class="nav-item {% if request.path == about_url %}active{% endif %}">
-        <a class="nav-link" href="{{ about_url }}">A Propos</a>
-      </li>
-      <li class="nav-item {% if request.path == produits_url %}active{% endif %}">
-        <a class="nav-link" href="{{ produits_url }}">Produits</a>
-      </li>
-     <li class="nav-item {% if request.path == panier_url %}active{% endif %}">
-         <a class="nav-link" href="{{ panier_url }}">{{ request.session.panier_items }} <i class="fas fa-shopping-cart"></i></a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {% if user.is_authenticated %}
-              {{ user.username }}
-          {% else %}
-               Compte
-          {% endif %}
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          {% if user.is_authenticated %}
-              <a class="dropdown-item" href="#">Déconnexion</a>
-          {% else %}
-              <a class="dropdown-item" href="{% url 'login' %}">Connexion</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% url 'insription' %}">Inscription</a>
-          {% endif %}
-        </div>
-      </li>
-    </ul>
-        {% include 'search/snippets/search_form.html' %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item {% if request.path == dashboard_url %}active{% endif %}">
+          <a class="nav-link" href="{{ dashboard_url }}">Bookmark
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Images</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">People</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mr-auto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            {% if user.is_authenticated %} {{ request.user.username }} {% else %} Compte {% endif %}
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% if request.user.is_authenticated %}
+            <a class="dropdown-item" href="{% url 'comptes:edit' %}">Modifier Profile</a>
+            <a class="dropdown-item" href="{% url 'comptes:password_change' %}">Modifier Password</a>
+            <a class="dropdown-item" href="{% url 'comptes:logout' %}">Déconnexion</a>
+            {% else %}
+            <a class="dropdown-item" href="{% url 'comptes:login' %}">Connexion</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'comptes:register' %}">Inscription</a>
+            {% endif %}
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
 </nav>

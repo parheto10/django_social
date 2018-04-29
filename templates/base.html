@@ -1,63 +1,36 @@
 {% load staticfiles %}
+
 <!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% include 'css.html' %}
+    {% block base_head %}{% endblock %}
     <title>{% block title %} Social Network{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'js/jquery-ui.min.css' %}">
-
-</head>
-<body>
-
-    <div id="header">
-        <span class="logo">Bookmarks</span>
-        {% if request.user.is_authenticated %}
-            <ul class="menu">
-                <li {% if section == "dashboard" %} class="selected" {% endif %}><a href="{% url 'comptes:dashboard' %}">Dashboard</a></li>
-                <li {% if section == "images" %} class="selected" {% endif %}><a href="#"></a></li>
-                <li {% if section == "people" %} class="selected" {% endif %}><a href="#"></a></li>
-            </ul>
-        {% endif %}
-
-        <span class="user">
-            {% if request.user.is_authenticated %}
-                Bienvenus {{ request.user.username }}, <a href="{% url 'comptes:logout' %}">Deconnexion</a>
-            {% else %}
-                <a href="{% url 'comptes:login' %}">Connexion</a>
+  </head>
+  <body>
+    {% include 'navbar.html' with brand_name="Bookmark" %}
+     <div class="container">
+        <div class="text-center">
+            {% if messages %}
+                <ul class="text-success">
+                    {% for message in messages %}
+                        <h3 class="{{ message.tags }}">
+                            {{ message|safe }}
+                        </h3>
+                    {% endfor %}
+                </ul>
             {% endif %}
-        </span>
-    </div>
+        </div>
 
-    {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                <li class="{{ message.tags }}">
-                    {{ message|safe }}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-    <div id="container">
-        {% block content %}
+         {% block content %}
+            {#le contenu de mon site#}
         {% endblock %}
-    </div>
+     </div>
 
-    <script src="{% static 'js/external/jquery/jquery.js' %}"></script>
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <script src="{% static 'js/jquery-ui.min.css' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-    <script>
-      $('.datepicker').datepicker({
-        format: 'dd/mm/yyyy',
-        startDate: '-3d'
-    });
-    </script>
-</body>
+     {% include 'js.html' %}
+  </body>
 </html>

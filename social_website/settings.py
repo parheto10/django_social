@@ -36,6 +36,12 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'comptes.authenticated.EmailAuthBackup',
+)
+
+
 # Application definition
 
 INSTALLED_APPS = [
