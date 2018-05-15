@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('', include('django.contrib.auth.urls')),
     url(r'^comptes/', include('comptes.urls', app_name="comptes", namespace="comptes")),
+    url(r'^images/', include('images.urls', app_name="images", namespace="images")),
 ]
 
 urlpatterns += [

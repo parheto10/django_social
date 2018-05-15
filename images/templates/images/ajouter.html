@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block title %}
+    Bookmark Images | - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <h1>Bookmark an Image</h1>
+    <img src="{{ request.GET.url }}" class="image-preview" alt="">
+    <form action="." method="post"> {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <p class="text-center">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    &nbsp;Ajouter Image
+                </button>
+            </p>
+        {% endbuttons %}
+    </form>
+{% endblock %}

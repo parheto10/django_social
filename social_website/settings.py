@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
 
     'comptes.apps.ComptesConfig',
+    'images.apps.ImagesConfig',
     'django.contrib.admin',
 ]
 
