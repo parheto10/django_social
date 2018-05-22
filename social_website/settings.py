@@ -25,7 +25,12 @@ SECRET_KEY = 'e7@xppo03li_ue4gswlic_f=^bid3d9jhh^0v)tg87*r6q*&ph'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'social-auth.com',
+    'https://social-auth.com:8000/',
+    'localhost',
+    '127.0.0.1',
+]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
@@ -35,10 +40,17 @@ EMAIL_HOST_PASSWORD = 'mietchomel@10#'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+#SOCIAL_AUTH_STORAGE = 'social_django_mongoengine.models.DjangoStorage'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'comptes.authenticated.EmailAuthBackup',
+
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.linkedin.LinkedinOAuth',
 )
 
 
@@ -61,6 +73,7 @@ INSTALLED_APPS = [
     'django_countries',
     'phonenumber_field',
     'sorl.thumbnail',
+    'social_django',
 
     'comptes.apps.ComptesConfig',
     'images.apps.ImagesConfig',
@@ -91,6 +104,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -163,5 +178,43 @@ from django.core.urlresolvers import reverse_lazy
 LOGIN_REDIRECT_URL = reverse_lazy('comptes:dashboard')
 LOGIN_URL = reverse_lazy('comptes:login')
 LOGOUT_URL = reverse_lazy('comptes:logout')
+
+#facebook
+SOCIAL_AUTH_FACEBOOK_KEY = '255179721627330'
+SOCIAL_AUTH_FACEBOOK_SECRET = '6ad3a40ec02cf97ee85370f04a875470'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS =  {
+    'locale':'fr_FR',
+    'fields': 'name, email'
+}
+
+#twitter
+SOCIAL_AUTH_TWITTER_KEY = 'AP0h7AsDObPZBh7shnMU8ShCG'
+SOCIAL_AUTH_TWITTER_SECRET = 'NDNT4ayfOozBBWNxvF8srSbYX2Kvl81lpzdrVWNv7Lerip9XYH'
+
+#google
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '747977493412-hmg9j91crrel2v9nv6ib6d47dbp1c6ec.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'xS1okD59DEcsjIxv1YEbW3K8'
+
+#github
+SOCIAL_AUTH_GITHUB_KEY = 'eab5e428ad89c685f876'
+SOCIAL_AUTH_GITHUB_SECRET = '02aa27463d874528945fb8006f3bf34b72569617'
+SOCIAL_AUTH_GITHUB_SCOPE = ['user:email']
+
+#linkedIn
+SOCIAL_AUTH_LINKEDIN_KEY = '86c5dgoxlzo7bh'
+SOCIAL_AUTH_LINKEDIN_SECRET = 'ToZjowes8XBTYlwN'
+#SOCIAL_AUTH_LINKEDIN_OAUTH2_SCOPE = ['user:email']
+#SOCIAL_AUTH_LINKEDIN_FIELD_OAUTH2_SELECTORS = ['name, email']
+
+
+# SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
+#     'social_core.backends.open_id.OpenIdAuth',
+#     'social_core.backends.google.GoogleOpenId',
+#     'social_core.backends.google.GoogleOAuth2',
+#     'social_core.backends.google.GoogleOAuth',
+#     'social_core.backends.twitter.TwitterOAuth',
+#     'social_core.backends.yahoo.YahooOpenId',
+# )
 
 

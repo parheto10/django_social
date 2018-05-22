@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block title %}
+    Accueil - {{ block.super }}
+{% endblock %}
+{% block content %}
+    <div class="row">
+    <div class="col-md-8">
+        <h1>DJANGO SOCIAL NETWORK ?</h1>
+        <p>
+            DJANGO SOCIAL NETWORK est le Réseau Social des Développeurs <br />
+            Et qui dit Développeurs, dit également partage de code Source ⌨ .<br />
+            Gràce à cette plateforme, vous avez la possibilité de tisser des <br />
+            liens d'amitiés avec d'autres dévéloppeurs, échanger du code sources ✍,<br />
+            recevoir de l'aide en cas de problème sur l'un de vos projet et bien plus encores !<br />
+            Alors n'hésiter surtout pas! <a href="{% url 'comptes:register' %}">à rejoindre la grande Communauté de Développeurs Django ✈</a>
+        </p>
+        <a class="btn btn-primary btn-lg" href="{% url 'comptes:login' %}">Connexion</a>
+    </div>
+    <div class="col-md-4">
+        Social Connexion
+        <ul>
+            <a class="btn btn-social-icon btn-facebook" href="{% url "social:begin" "facebook" %}"><i class="fab fa-facebook-f"></i> Facebook</a><br/>
+            <a class="btn btn-social-icon btn-twitter" href="{% url "social:begin" "twitter" %}"><i class="fab fa-twitter"></i> Twitter</a><br/>
+            <a class="btn btn-social-icon btn-google-plus" href="{% url "social:begin" "google-oauth2" %}"><i class="fab fa-google"></i> Google</a><br/>
+            <a class="btn btn-social-icon btn-github" href="{% url "social:begin" "github" %}"><i class="fab fa-github"></i> Github</a><br/>
+            <a class="btn btn-social-icon btn-linkedin" href="{% url "social:begin" "linkedin" %}"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+        </ul>
+    </div>
+    </div>
+{% endblock %}

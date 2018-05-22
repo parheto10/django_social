@@ -18,11 +18,16 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
 
+from .views import home
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('', include('django.contrib.auth.urls')),
     url(r'^comptes/', include('comptes.urls', app_name="comptes", namespace="comptes")),
     url(r'^images/', include('images.urls', app_name="images", namespace="images")),
+    #url('social-auth/', include('social.apps.django_app.urls', namespace="social")),
+    url(r'social-auth/', include('social_django.urls', namespace='social')),
+    url(r'', home, name='home'),
 ]
 
 urlpatterns += [
